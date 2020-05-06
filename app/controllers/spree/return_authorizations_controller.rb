@@ -1,6 +1,5 @@
 module Spree
   class ReturnAuthorizationsController < StoreController
-    before_action :redirect_unauthorized_access, unless: :spree_current_user
     before_action :load_order, only: [:new, :create, :show]
     before_action :check_item_returnable, only: [:create]
     before_action :load_return_authorization, only: :show
@@ -110,7 +109,7 @@ module Spree
     end
 
     def return_authorization_params
-      params.require(:return_authorization).permit(:return_authorization_reason_id, :memo, return_items_attributes: [:inventory_unit_id, :_destroy, :exchange_variant_id])
+      params.require(:return_authorization).permit(:stock_location_id, :return_authorization_reason_id, :memo, return_items_attributes: [:inventory_unit_id, :_destroy, :exchange_variant_id, :return_quantity, :resellable])
     end
   end
 end
