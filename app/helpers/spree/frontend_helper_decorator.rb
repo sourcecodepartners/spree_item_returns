@@ -18,4 +18,7 @@ Spree::FrontendHelper.class_eval do
     end
   end
 
+  def grouped_return_items_by_shipment(return_items)
+    return_items.group_by{|return_item| return_item.inventory_unit&.shipment}
+  end
 end

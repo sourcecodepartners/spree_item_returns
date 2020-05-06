@@ -1,11 +1,10 @@
 Deface::Override.new(
-  virtual_path: 'spree/orders/show',
+  virtual_path: 'spree/shared/_order_details',
   name: 'user_return_authorization_initailization_button',
-  insert_bottom: "#order_summary h1",
+  insert_top: "div.row div.col-12:first-child",
   text: "
         <% if spree_current_user.present? && @order.shipped? && @order.has_returnable_products? && @order.has_returnable_line_items? %>
-          <%= link_to(spree.new_order_return_authorization_path(@order), class: 'btn btn-primary pull-right') do %>
-            <span class='glyphicon glyphicon-send'></span>
+          <%= link_to(spree.new_order_return_authorization_path(@order), class: 'btn btn-primary btn-sm float-right mr-5 mb-1') do %>
             <%= Spree.t(:return_products) %>
           <% end %>
         <% end %>
