@@ -12,10 +12,13 @@ Spree::FrontendHelper.class_eval do
     line_item.product.returnable? && line_item.is_returnable?
   end
 
+  def grouped_return_items_by_shipment(return_items)
+    return_items.group_by{|return_item| return_item.inventory_unit&.shipment}
+  end
+
   def all_item_returned?
     return 'hidden' unless @form_return_items.any? do |return_item|
       return_item.returned?
     end
   end
-
 end
